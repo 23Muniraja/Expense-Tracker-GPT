@@ -3,12 +3,15 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 # from db_helper import get_connection
 from backend.db_helper import get_connection
+from backend.logger import logger
+
 
 
 app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
 
 @app.route('/')
 def home():
+    logger.info("Home page accessed")
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM expenses ORDER BY expense_date DESC")
@@ -104,7 +107,7 @@ def add_expense():
         conn.commit()
         cursor.close()
         conn.close()
-
+        logger.info(f"Added expense: ₹{amount}, {category}, {notes}")
         return redirect(url_for('home'))
 
     return render_template('add_expense.html')
@@ -127,6 +130,7 @@ def edit_expense(id):
         conn.commit()
         cursor.close()
         conn.close()
+        logger.info(f"Edited expense ID {id}")
         return redirect(url_for('home'))
 
     # GET: show form with existing data
@@ -147,6 +151,7 @@ def delete_expense(id):
     conn.commit()
     cursor.close()
     conn.close()
+    logger.info(f"Deleted expense ID {id}")
     return redirect(url_for('home'))
 
 if __name__ == '__main__':
