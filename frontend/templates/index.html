@@ -1,0 +1,35 @@
+<!-- frontend/templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-4">Your Expenses</h3>
+
+<a href="/add" class="btn btn-success mb-3">+ Add Expense</a>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Date</th>
+            <th>Amount (₹)</th>
+            <th>Category</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exp in expenses %}
+        <tr>
+            <td>{{ exp.expense_date }}</td>
+            <td>{{ exp.amount }}</td>
+            <td>{{ exp.category }}</td>
+            <td>{{ exp.notes }}</td>
+            <td>
+                <a href="/edit/{{ exp.id }}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/delete/{{ exp.id }}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
