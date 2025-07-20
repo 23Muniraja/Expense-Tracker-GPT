@@ -1,0 +1,28 @@
+<!-- frontend/templates/edit_expense.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Edit Expense</h3>
+
+<form method="POST">
+    <div class="mb-3">
+        <label>Date</label>
+        <input type="date" class="form-control" name="expense_date" value="{{ expense.expense_date|strftime('%Y-%m-%d') }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Amount (₹)</label>
+        <input type="number" class="form-control" name="amount" step="0.01" value="{{ expense.amount }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Category</label>
+        <input type="text" class="form-control" name="category" value="{{ expense.category }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Notes</label>
+        <textarea class="form-control" name="notes">{{ expense.notes }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a href="/" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}
