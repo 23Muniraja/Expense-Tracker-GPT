@@ -1,0 +1,28 @@
+<!-- frontend/templates/add_expense.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Add New Expense</h3>
+
+<form method="POST" action="/add">
+    <div class="mb-3">
+        <label>Date</label>
+        <input type="date" class="form-control" name="expense_date" required>
+    </div>
+    <div class="mb-3">
+        <label>Amount (₹)</label>
+        <input type="number" class="form-control" name="amount" step="0.01" required>
+    </div>
+    <div class="mb-3">
+        <label>Category</label>
+        <input type="text" class="form-control" name="category" required>
+    </div>
+    <div class="mb-3">
+        <label>Notes</label>
+        <textarea class="form-control" name="notes"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Expense</button>
+    <a href="/" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}
