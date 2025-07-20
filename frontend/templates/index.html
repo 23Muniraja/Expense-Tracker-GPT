@@ -31,5 +31,44 @@
         {% endfor %}
     </tbody>
 </table>
+<h2 class="mt-5">Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="yearlyChart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="monthlyChart"></canvas>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <canvas id="categoryChart"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="topExpensesChart"></canvas>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12 text-center">
+        <h4>Average Monthly Spend:</h4>
+        <div id="avgSpendValue" style="font-size: 2rem; font-weight: bold;"></div>
+    </div>
+</div>
+
+<!-- Hidden JSON to JS bridge -->
+<script type="application/json" id="yearly-data">{{ yearly_data | tojson }}</script>
+<script type="application/json" id="monthly-data">{{ monthly_data | tojson }}</script>
+<script type="application/json" id="category-data">{{ category_data | tojson }}</script>
+<script type="application/json" id="top-expenses">{{ top_expenses | tojson }}</script>
+<div id="avg-monthly" style="display:none;">{{ avg_monthly }}</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Our JS -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
 {% endblock %}
